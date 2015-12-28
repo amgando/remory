@@ -6,29 +6,49 @@
 #   - I can enter a number
 #   - the board displays the card in the respective slot
 
+require 'sinatra'
 
 # setup the cards
-cards = [['a','*'],['b','*'],['a','*'],['b','*']] # setup the data structure
+set :cards, [['a','*'],['b','*'],['a','*'],['b','*']]    # setup the data structure
 
 # setup the view
-puts "welcome to Remory, a game of memory"        # print game header
-view = cards.map(&:last)                          # setup game variables
+set :welcome, "welcome to remory, a ruby game of memory" # display game header
+set :view, settings.cards.map(&:last)                    # setup game variables
 
-# show the board
-puts
-puts "-" * 20                                     # print round header
-puts "here is the board"
-puts view.join(" | ")                             # print the board
-puts "pick a number 1 - #{cards.length}"          # prompt the user for input
+get '/'do
+  output = "here is the board"                            # display round header
+  output += "<br>"                                        # newline
+  output += settings.view.join(' | ')                     # display the board
+  output += "<br><br>"                                    # 2 newlines
+  output += "pick a number 1 - #{settings.cards.length}"  # prompt the user for input
+  output += <<-HTML
+  <form action="/play" method="post">
+    <input type="text" name="input" placeholder="1 - 4" autofocus>
+    <input type="submit">
+  </form>
+  HTML
 
-# collect the input
-input = gets.chomp                                # collect and clean user input
-pos = input.to_i - 1                              # convert input to a number
+  output
+end
 
-# apply the input
-face = cards[pos].first                           # extract card value
-view[pos] = face                                  # save card value to view
+post '/play' do
+  output = "here is the board"                            # display round header
+  output += "<br>"                                        # newline
+  output += settings.view.join(' | ')                     # display the board
+  output += "<br>"                                        # newline
 
-# show the result
-puts "you flipped card #{input}"
-puts view.join(" | ")                             # print the board
+  input = params[:input]                                  # collect user input
+  pos = input.to_i - 1                                    # convert input to a number
+
+  # apply the input
+  face = settings.cards[pos].first                         # extract card value
+  settings.view[pos] = face                                # save card value to view
+
+  # show the result
+  output += "<br>"
+  output += "you flipped card #{input}"
+  output += "<br>"
+  output += settings.view.join(' | ')                      # display the board
+
+  output
+end
