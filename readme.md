@@ -4,6 +4,12 @@ Welcome to Remory, a simple console game based on this [memory game](http://www.
 
 The goal of this project is to introduce complete beginners to the fun of writing a Ruby program in small, reasonable steps.
 
+> NOTE
+> 
+> This branch of the repo is a naive conversion (basically the same code with a few routes added to support Sinatra interactions) of the console application to a web-based version.  
+> 
+> For a more realistic web-based version of the game (ie. one that supports more than 1 session!) we would need to rewrite much more of this code.
+
 The files in this project are organized into a series of numbered files:
 
 - `1.rb`: the beginning of a game, we can play 1 round
