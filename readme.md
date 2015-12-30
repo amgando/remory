@@ -4,7 +4,9 @@ Welcome to Remory, a simple console game based on this [memory game](http://www.
 
 The goal of this project is to introduce complete beginners to the fun of writing a Ruby program in small, reasonable steps.
 
-The files in this project are organized into a series of numbered files:
+**The presentation for this project can be found here: [presentation](https://goo.gl/oH89WH)**
+
+The code in this project are organized into a series of numbered files:
 
 - `1.rb`: the beginning of a game, we can play 1 round
 - `2.rb`: we use a loop to play more than 1 round
